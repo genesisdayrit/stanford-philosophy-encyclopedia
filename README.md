@@ -146,7 +146,7 @@ if __name__ == "__main__":
 2. Run the script using a Python interpreter:
 
 ```sh
-python script_name.py
+python scrape_random_entry.py
 ```
 
 3. The script will navigate to the SEP main page, click the "Random Entry" link, scrape the resulting page, and print the formatted content to the console.
