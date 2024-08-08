@@ -79,8 +79,8 @@ def call_openai_api(scraped_content):
     prompt = f"""
     The following is a random entry from the Stanford Encyclopedia of Philosophy. 
     Please highlight in bullet points key ideas, people, and concepts as well as the outline of the entry.
-    Also give recommendations for further reading or consumption to learn more about the topic(s) covered in the entry.
-
+    Also give recommendations for further reading or consumption to learn more about the topic(s) covered in the entry
+    as well as reflective questions that are good to have conversations about.
     Scraped Content:
     {scraped_content}
     """
