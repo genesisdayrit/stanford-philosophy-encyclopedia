@@ -35,10 +35,10 @@ def scrape_and_prettify_content(url):
         # Combine the title and content
         full_content = f"Title: {title}\n\nContent:\n{content}"
 
-        return full_content
+        return full_content, title
     else:
         print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
-        return None
+        return None, None
 
 def send_email(subject, message_body, to_email, from_email, password):
     try:
@@ -119,19 +119,19 @@ def main():
     random_entry_url = driver.current_url
     
     # Scrape and prettify the content of the new page
-    scraped_content = scrape_and_prettify_content(random_entry_url)
+    scraped_content, entry_tile = scrape_and_prettify_content(random_entry_url)
     
     if scraped_content:
         # Call OpenAI API with the scraped content
         openai_response = call_openai_api(scraped_content)
         
         # Format the response for HTML
-        formatted_content = markdown_to_html(openai_response)
+        formatted_content = markdown_to_html(f"URL: {random_entry_url}\n\n{openai_response}")
         
         # Send the OpenAI response via email
         email = os.getenv('GMAIL_ACCOUNT')
         password = os.getenv('GMAIL_PASSWORD')
-        subject = "Insights from Stanford Encyclopedia of Philosophy Entry"
+        subject = f"Plato Random Entry: {entry_title}"
         send_email(subject, formatted_content, "genesisdayrit@gmail.com", email, password)
     
     # Close the WebDriver
