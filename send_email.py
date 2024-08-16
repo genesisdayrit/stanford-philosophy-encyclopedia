@@ -119,7 +119,7 @@ def main():
     random_entry_url = driver.current_url
     
     # Scrape and prettify the content of the new page
-    scraped_content, entry_tile = scrape_and_prettify_content(random_entry_url)
+    scraped_content, entry_title = scrape_and_prettify_content(random_entry_url)
     
     if scraped_content:
         # Call OpenAI API with the scraped content
@@ -132,7 +132,7 @@ def main():
         email = os.getenv('GMAIL_ACCOUNT')
         password = os.getenv('GMAIL_PASSWORD')
         subject = f"Plato Random Entry: {entry_title}"
-        send_email(subject, formatted_content, "genesisdayrit@gmail.com", email, password)
+        send_email(subject, formatted_content, email, email, password)
     
     # Close the WebDriver
     driver.quit()
